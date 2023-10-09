@@ -33,8 +33,12 @@ public class PlayingService {
 
 
     public void startGame(Step step, Level level, Player player) {
-        List<Step> steps = Optional.ofNullable(player.getSteps()).orElse(new ArrayList<>());
+        if (step == null || level == null || player == null) {
+            throw new WrongChallengeException("parameters can not be null");
+        }
 
+        // Optional class can be control null pointer exception.
+        List<Step> steps = Optional.ofNullable(player.getSteps()).orElse(new ArrayList<>());
 
         if (step instanceof SemiFinal) {
             steps.stream().filter(s -> s instanceof Start)

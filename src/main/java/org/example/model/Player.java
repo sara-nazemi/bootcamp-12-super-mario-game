@@ -8,7 +8,7 @@ import java.util.List;
 public class Player {
     private String name;
 
-    private List<Step> steps ;
+    private List<Step> steps;
 
     public Player() {
     }

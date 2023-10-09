@@ -18,40 +18,26 @@ public class RandomUtil {
     private static Random rnd = new Random();
 
     private static Map<Integer, Level> LEVEL_MAP = new HashMap<>();
+    private static Map<Integer, Step> STEP_MAP = new HashMap<>();
 
     static {
-        LEVEL_MAP.put(1, new Easy());
+        LEVEL_MAP.put(1, Easy.getInstance());
+        LEVEL_MAP.put(2, Normal.getInstance());
+        LEVEL_MAP.put(3, Hard.getInstance());
+
+        STEP_MAP.put(1, Start.getInstance());
+        STEP_MAP.put(2, SemiFinal.getInstance());
+        STEP_MAP.put(3, Final.getInstance());
     }
 
     public static Level getRandomLevel() {
-
         int rndInt = rnd.nextInt(3);
+        return LEVEL_MAP.getOrDefault(rndInt, Easy.getInstance());
 
-        return LEVEL_MAP.getOrDefault(rndInt, new Easy());
-//        switch (rndInt) {
-//            case 1:
-//                return new Easy();
-//            case 2:
-//                return new Normal();
-//            case 3:
-//                return new Hard();
-//            default:
-//                return new Easy();
-//        }
     }
 
     public static Step getRandomStep() {
         int rndInt = rnd.nextInt(3);
-        switch (rndInt) {
-            case 1:
-                return new Start();
-
-            case 2:
-                return new SemiFinal();
-            case 3:
-                return new Final();
-            default:
-                return new Start();
-        }
+        return STEP_MAP.getOrDefault(rndInt, Start.getInstance());
     }
 }
